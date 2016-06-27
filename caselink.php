@@ -63,15 +63,19 @@ function caselink_civicrm_customFieldOptions( $fieldID, &$options, $detailedForm
      * Build an oprion list with all the cases in the system.
      */
     $sql = "
-        SELECT `civicrm_case`.*, civicrm_contact.display_name 
+        SELECT `civicrm_case`.*, civicrm_contact.display_name, casetype.title as case_type_label
         FROM `civicrm_case` 
         INNER JOIN civicrm_case_contact ON civicrm_case.id = civicrm_case_contact.case_id
         INNER JOIN civicrm_contact ON civicrm_case_contact.contact_id = civicrm_contact.id
+        LEFT JOIN civicrm_case_type casetype on casetype.id = civicrm_case.case_type_id
         WHERE civicrm_case.`is_deleted` = 0
         ORDER BY civicrm_contact.display_name, civicrm_case.subject";
     $dao = CRM_Core_DAO::executeQuery($sql);
     while ($dao->fetch()) {
       $label = $dao->display_name.' :: '.$dao->subject;
+      if (!empty($dao->case_type_label)) {
+        $label .= ' ('.$dao->case_type_label.')';
+      }
       if ($detailedFormat) {
         $options[$dao->id] = array(
           'id' => $dao->id,
