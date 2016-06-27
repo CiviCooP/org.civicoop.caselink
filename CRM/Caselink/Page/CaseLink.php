@@ -23,13 +23,14 @@ class CRM_Caselink_Page_CaseLink extends CRM_Core_Page {
     $case_status = array();
     $params =array('name' => 'case_status');
     CRM_Core_BAO_OptionGroup::retrieve($params, $case_status);
-    $sql = "SELECT civicrm_case.*, civicrm_case_contact.contact_id as client_id, civicrm_contact.display_name, ov.label as case_status_label"
-      . "FROM `".$config->getCustomGroup('table_name')."` AS `case_link`
-        INNER JOIN `civicrm_case` ON `case_link`.`".$config->getCaseIdField('column_name')."` = `civicrm_case`.`id`"
-      . "INNER JOIN `civicrm_case_contact` ON `civicrm_case`.`id` = `civicrm_case_contact`.`case_id`"
-      . "INNER JOIN `civicrm_contact` ON `civicrm_case_contact`.`contact_id`  = `civicrm_contact`.`id`"
-      . "LEFT JOIN  civicrm_option_value ov ON ( civicrm_case.status_id=ov.value AND ov.option_group_id='".$case_status['id']."')"
-      . "WHERE `case_link`.`entity_id` = '".$this->caseId."' LIMIT 1";
+    $sql = "SELECT civicrm_case.*, civicrm_case_contact.contact_id as client_id, civicrm_contact.display_name, ov.label as case_status_label, casetype.title as case_type_label"
+      . " FROM `".$config->getCustomGroup('table_name')."` AS `case_link`"
+      . " INNER JOIN `civicrm_case` ON `case_link`.`".$config->getCaseIdField('column_name')."` = `civicrm_case`.`id`"
+      . " INNER JOIN `civicrm_case_contact` ON `civicrm_case`.`id` = `civicrm_case_contact`.`case_id`"
+      . " INNER JOIN `civicrm_contact` ON `civicrm_case_contact`.`contact_id`  = `civicrm_contact`.`id`"
+      . " LEFT JOIN  civicrm_option_value ov ON ( civicrm_case.status_id=ov.value AND ov.option_group_id='".$case_status['id']."')"
+      . " LEFT JOIN civicrm_case_type casetype ON casetype.id = civicrm_case.case_type_id"
+      . " WHERE `case_link`.`entity_id` = '".$this->caseId."' LIMIT 1";
     $dao = CRM_Core_DAO::executeQuery($sql);
     $case = false;
     if ($dao->fetch()) {
@@ -40,6 +41,9 @@ class CRM_Caselink_Page_CaseLink extends CRM_Core_Page {
       $query['context'] = 'case';
       $url = CRM_Utils_System::url("civicrm/contact/view/case", $query);
       $label = $dao->display_name.'::'.$dao->subject;
+      if (!empty($dao->case_type_label)) {
+        $label .= ' ('.$dao->case_type_label.')';
+      }
       $case = array(
         'url' => $url,
         'label' => htmlentities($label, ENT_QUOTES),
