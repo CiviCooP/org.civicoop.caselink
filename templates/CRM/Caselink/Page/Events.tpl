@@ -1,6 +1,6 @@
 <div id="case-caselink-events" class="crm-accordion-wrapper">
 
-    <div class="crm-accordion-header">{ts}Related events{/ts}</div>
+    <div class="crm-accordion-header">{ts}Related sub events{/ts}</div>
 
     <div class="crm-accordion-body">
         {if $permission EQ 'edit'}

@@ -4,7 +4,7 @@
     <CustomGroups>
         <CustomGroup>
             <name>caselink_event</name>
-            <title>Link event to case</title>
+            <title>Link event to parent case</title>
             <extends>Event</extends>
             <style>Inline</style>
             <collapse_display>1</collapse_display>
@@ -22,7 +22,7 @@
     <CustomFields>
         <CustomField>
             <name>case_id</name>
-            <label>Link to case</label>
+            <label>Link to parent case</label>
             <data_type>String</data_type>
             <html_type>Select</html_type>
             <is_required>0</is_required>
