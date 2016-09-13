@@ -1,4 +1,4 @@
-<div id="case-caselink-events" class="crm-accordion-wrapper">
+<div id="case-caselink-events" class="crm-accordion-wrapper collapsed">
 
     <div class="crm-accordion-header">{ts}Related sub events{/ts}</div>
 
