@@ -29,7 +29,7 @@ class CRM_Caselink_Page_Cases extends CRM_Core_Page {
       . "INNER JOIN `civicrm_contact` ON `civicrm_case_contact`.`contact_id`  = `civicrm_contact`.`id` "
       . "LEFT JOIN  civicrm_option_value ov ON ( civicrm_case.status_id=ov.value AND ov.option_group_id='".$case_status['id']."') "
       . "LEFT JOIN  civicrm_case_type casetype ON civicrm_case.case_type_id=casetype.id "
-      . "WHERE `case_link`.`".$config->getCaseIdField('column_name')."` = '".$this->caseId."'";
+      . "WHERE `case_link`.`".$config->getCaseIdField('column_name')."` = '".$this->caseId."' AND civicrm_case.is_deleted = '0'";
     $dao = CRM_Core_DAO::executeQuery($sql);
     $cases = array();
     while($dao->fetch()) {
