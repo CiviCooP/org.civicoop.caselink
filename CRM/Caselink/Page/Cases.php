@@ -15,8 +15,6 @@ class CRM_Caselink_Page_Cases extends CRM_Core_Page {
   public function run() {
     $this->preProcess();
 
-    //get template file name
-    $pageTemplateFile = $this->getHookedTemplateFileName();
     $config = CRM_Caselink_Config_CaseLinkCase::singleton();
 
     $case_status = array();
@@ -49,6 +47,8 @@ class CRM_Caselink_Page_Cases extends CRM_Core_Page {
     $this->assign('customGroupName', $config->getCustomGroup('name'));
 
 
+    //get template file name
+    $pageTemplateFile = $this->getHookedTemplateFileName();
     //render the template
     $content = self::$_template->fetch($pageTemplateFile);
 
