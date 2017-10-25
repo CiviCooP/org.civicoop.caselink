@@ -18,7 +18,7 @@ function caselink_civicrm_caseSummary($caseId) {
    */
   $page = new CRM_Caselink_Page_CaseLink($caseId);
   $content['caselink_case_id']['value'] = $page->run();
-
+	
   /**
    * Build a tab with all the linked cases
    */

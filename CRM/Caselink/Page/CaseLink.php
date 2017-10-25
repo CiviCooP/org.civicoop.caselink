@@ -12,6 +12,10 @@ class CRM_Caselink_Page_CaseLink extends CRM_Core_Page {
     parent::__construct();
     $this->caseId = $caseId;
   }
+	
+	public function getCaseId() {
+		return $this->caseId;
+	}
 
   public function run() {
     $this->preProcess();

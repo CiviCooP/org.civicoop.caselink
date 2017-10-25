@@ -43,7 +43,7 @@
     {literal}
     cj(function() {
         var caselinkEvents = cj('#case-caselink-events').detach();
-        cj('#{/literal}{$customGroupName}{literal}').after(caselinkEvents);
+        cj('#case_custom_edit').before(caselinkEvents);
     });
     {/literal}
 </script>
