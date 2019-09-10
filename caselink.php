@@ -3,12 +3,18 @@
 require_once 'caselink.civix.php';
 
 function caselink_civicrm_buildForm($formName, &$form) {
-  if ($formName == 'CRM_Case_Form_Case') {
+  if ($formName == 'CRM_Case_Form_Case' || $formName == 'CRM_Custom_Form_CustomDataByType') {
     //set default values
     CRM_Caselink_Form_Case::setDefaultCaseLink($formName, $form);
   }
   if ($form instanceof CRM_Event_Form_ManageEvent_EventInfo) {
     CRM_Caselink_Form_EventInfo::setDefaultCaseLink($formName, $form);
+  }
+}
+
+function caselink_civicrm_postProcess($formName, &$form) {
+  if ($formName == 'CRM_Case_Form_Case') {
+    CRM_Caselink_Form_Case::clearDefaultCaseLinkFromSession();
   }
 }
 
@@ -18,7 +24,7 @@ function caselink_civicrm_caseSummary($caseId) {
    */
   $page = new CRM_Caselink_Page_CaseLink($caseId);
   $content['caselink_case_id']['value'] = $page->run();
-	
+
   /**
    * Build a tab with all the linked cases
    */
