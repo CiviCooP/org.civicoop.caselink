@@ -23,5 +23,9 @@
   </compatibility>
   <civix>
     <namespace>CRM/Caselink</namespace>
+    <format>22.10.0</format>
   </civix>
+  <classloader>
+    <psr0 prefix="CRM_" path="."/>
+  </classloader>
 </extension>
