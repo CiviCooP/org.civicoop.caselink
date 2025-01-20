@@ -3,7 +3,7 @@
 /**
  * Collection of upgrade steps.
  */
-class CRM_Caselink_Upgrader extends CRM_Caselink_Upgrader_Base {
+class CRM_Caselink_Upgrader extends CRM_Extension_Upgrader_Base {
 
   public function install() {
     $this->executeCustomDataFile('xml/caselink_case.xml');

@@ -18,14 +18,18 @@
   <version>1.8</version>
   <develStage>stable</develStage>
   <compatibility>
-    <ver>4.6</ver>
-    <ver>5.13</ver>
+    <ver>5.38</ver>
   </compatibility>
   <civix>
     <namespace>CRM/Caselink</namespace>
-    <format>22.10.0</format>
+    <format>24.09.1</format>
   </civix>
   <classloader>
     <psr0 prefix="CRM_" path="."/>
+    <psr4 prefix="Civi\" path="Civi"/>
   </classloader>
+  <upgrader>CRM_Caselink_Upgrader</upgrader>
+  <mixins>
+    <mixin>smarty-v2@1.0.3</mixin>
+  </mixins>
 </extension>
